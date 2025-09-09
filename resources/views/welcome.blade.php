@@ -177,11 +177,13 @@
             <div class="flex justify-between items-center">
                 <div class="text-2xl font-bold text-primary">OrganiCorp</div>
                 <div class="hidden md:flex space-x-6">
-                    <a href="#home" class="text-foreground hover:text-primary transition-colors">Home</a>
+                    <a href="#home" class="text-foreground hover:text-primary transition-colors">Dashboard</a>
                     <a href="#about" class="text-foreground hover:text-primary transition-colors">About</a>
                     <a href="#vision" class="text-foreground hover:text-primary transition-colors">Vision</a>
                     <a href="#team" class="text-foreground hover:text-primary transition-colors">Team</a>
                     <a href="#contact" class="text-foreground hover:text-primary transition-colors">Contact</a>
+                    <a href="#contact" class="text-foreground hover:text-primary transition-colors">Login</a>
+                    <a href="#contact" class="text-foreground hover:text-primary transition-colors">Sign up</a>
                 </div>
             </div>
         </div>
