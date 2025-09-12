@@ -1,12 +1,11 @@
 <?php
 
+use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomePageController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -21,5 +20,6 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function(){
     Route::resource('/member', MemberController::class);
 });
+
 
 require __DIR__.'/auth.php';
