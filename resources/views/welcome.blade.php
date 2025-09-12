@@ -176,15 +176,15 @@
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <div class="text-2xl font-bold text-primary">CATALYST ORG</div>
-                    <a href="#home" class="text-foreground hover:text-primary transition-colors">Dashboard</a>
-                    <a href="#about" class="text-foreground hover:text-primary transition-colors">About</a>
-                    <a href="#vision" class="text-foreground hover:text-primary transition-colors">Vision</a>
-                    <a href="#team" class="text-foreground hover:text-primary transition-colors">Team</a>
-                    <a href="#contact" class="text-foreground hover:text-primary transition-colors">Contact</a>
-                    <a href="{{ route('login') }}" class="text-foreground hover:text-primary transition-colors">Login</a>
-                    {{-- <a href="#contact" class="text-foreground hover:text-primary transition-colors">Sign up</a> --}}
-                </div>
+                <a href="#home" class="text-foreground hover:text-primary transition-colors">Dashboard</a>
+                <a href="#about" class="text-foreground hover:text-primary transition-colors">About</a>
+                <a href="#vision" class="text-foreground hover:text-primary transition-colors">Vision</a>
+                <a href="#team" class="text-foreground hover:text-primary transition-colors">Team</a>
+                <a href="#contact" class="text-foreground hover:text-primary transition-colors">Contact</a>
+                <a href="{{ route('login') }}" class="text-foreground hover:text-primary transition-colors">Login</a>
+                {{-- <a href="#contact" class="text-foreground hover:text-primary transition-colors">Sign up</a> --}}
             </div>
+        </div>
         </div>
     </nav>
 
@@ -195,26 +195,12 @@
         </div>
         <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
             <h1 class="text-5xl md:text-7xl font-bold mb-6 fade-in">
-                Transforming the Future
+                CATALYST ENTREPRENUEUR SOCIETY
             </h1>
             <p class="text-xl md:text-2xl mb-8 fade-in opacity-90">
                 Leading innovation and excellence in organizational development, creating sustainable solutions for
                 tomorrow's challenges.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
-                <button
-                    class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-11 px-8 text-primary hover:text-primary-dark">
-                    Learn More
-                    <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                    </svg>
-                </button>
-                <button
-                    class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background hover:bg-accent hover:text-accent-foreground h-11 px-8 border-white text-white hover:bg-white hover:text-primary">
-                    Get Started
-                </button>
-            </div>
         </div>
     </section>
 
@@ -225,10 +211,7 @@
                 <div
                     class="card-hover rounded-lg border bg-gradient-to-br from-accent to-background border-primary/20 text-card-foreground shadow-sm">
                     <div class="flex flex-col space-y-1.5 p-6 text-center">
-                        <h3 class="text-4xl font-bold text-primary mb-4">About OrganiCorp</h3>
-                        <p class="text-lg text-sm text-muted-foreground">
-                            Building tomorrow's organizations today
-                        </p>
+                        <h3 class="text-4xl font-bold text-primary mb-4">About CES</h3>
                     </div>
                     <div class="p-6 pt-0 text-center">
                         <p class="text-lg text-muted-foreground leading-relaxed">
@@ -411,75 +394,20 @@
                 <p class="text-lg text-muted-foreground">The passionate professionals driving our success</p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            @foreach($members as $member)
+            <div class="grid md:grid-cols-2 gap-8">
                 <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm text-center">
                     <div class="flex flex-col space-y-1.5 p-6">
                         <div class="mx-auto mb-4">
-                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&h=256&q=80"
+                            <img src="{{ asset('storage/'.$member->profile_picture) }}"
                                 alt="CEO - Sarah Johnson"
                                 class="w-24 h-24 rounded-full object-cover mx-auto border-4 border-primary/20">
                         </div>
-                        <h3 class="text-xl font-semibold leading-none tracking-tight">Sarah Johnson</h3>
-                        <p class="text-primary font-semibold text-sm text-muted-foreground">Chief Executive Officer</p>
-                    </div>
-                    <div class="p-6 pt-0">
-                        <p class="text-sm text-muted-foreground">
-                            Visionary leader with 15+ years in organizational development and strategic planning.
-                        </p>
+                        <h3 class="text-xl font-semibold leading-none tracking-tight">{{ $member->name }}</h3>
+                        <p class="text-primary font-semibold text-sm text-muted-foreground">{{ $member->role }}</p>
                     </div>
                 </div>
-
-                <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm text-center">
-                    <div class="flex flex-col space-y-1.5 p-6">
-                        <div class="mx-auto mb-4">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&h=256&q=80"
-                                alt="CTO - Michael Chen"
-                                class="w-24 h-24 rounded-full object-cover mx-auto border-4 border-primary/20">
-                        </div>
-                        <h3 class="text-xl font-semibold leading-none tracking-tight">Michael Chen</h3>
-                        <p class="text-primary font-semibold text-sm text-muted-foreground">Chief Technology Officer
-                        </p>
-                    </div>
-                    <div class="p-6 pt-0">
-                        <p class="text-sm text-muted-foreground">
-                            Technology innovator focused on digital transformation and process optimization.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm text-center">
-                    <div class="flex flex-col space-y-1.5 p-6">
-                        <div class="mx-auto mb-4">
-                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&h=256&q=80"
-                                alt="Marketing Director - Emily Rodriguez"
-                                class="w-24 h-24 rounded-full object-cover mx-auto border-4 border-primary/20">
-                        </div>
-                        <h3 class="text-xl font-semibold leading-none tracking-tight">Emily Rodriguez</h3>
-                        <p class="text-primary font-semibold text-sm text-muted-foreground">Marketing Director</p>
-                    </div>
-                    <div class="p-6 pt-0">
-                        <p class="text-sm text-muted-foreground">
-                            Creative strategist specializing in brand development and market expansion.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm text-center">
-                    <div class="flex flex-col space-y-1.5 p-6">
-                        <div class="mx-auto mb-4">
-                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&h=256&q=80"
-                                alt="Operations Manager - David Thompson"
-                                class="w-24 h-24 rounded-full object-cover mx-auto border-4 border-primary/20">
-                        </div>
-                        <h3 class="text-xl font-semibold leading-none tracking-tight">David Thompson</h3>
-                        <p class="text-primary font-semibold text-sm text-muted-foreground">Operations Manager</p>
-                    </div>
-                    <div class="p-6 pt-0">
-                        <p class="text-sm text-muted-foreground">
-                            Operations expert ensuring seamless delivery and exceptional client experiences.
-                        </p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
