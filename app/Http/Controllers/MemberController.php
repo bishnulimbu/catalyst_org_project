@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class MemberController extends Controller
 {
@@ -31,8 +32,9 @@ class MemberController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
+            'role' => 'required|string|max:255',
             'profile_picture' => 'nullable|image|max:2048',
+            'email' => 'required|email|unique:members',
         ]);
 
         if ($request->hasFile('profile_picture')) {
@@ -51,7 +53,7 @@ class MemberController extends Controller
      */
     public function edit(Member $member)
     {
-        return view('admin.memberEdit', compact('member'));
+        return view('admin.member.edit', compact('member'));
     }
 
     /**
@@ -61,8 +63,13 @@ class MemberController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
+            'role' => 'required|string|max:255',
             'profile_picture' => 'nullable|image|max:2048',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('members')->ignore($member->id),
+            ],
         ]);
 
         if ($request->hasFile('profile_picture')) {
