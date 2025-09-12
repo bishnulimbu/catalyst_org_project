@@ -175,15 +175,14 @@
     <nav class="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold text-primary">OrganiCorp</div>
-                <div class="hidden md:flex space-x-6">
+                <div class="text-2xl font-bold text-primary">CATALYST ORG</div>
                     <a href="#home" class="text-foreground hover:text-primary transition-colors">Dashboard</a>
                     <a href="#about" class="text-foreground hover:text-primary transition-colors">About</a>
                     <a href="#vision" class="text-foreground hover:text-primary transition-colors">Vision</a>
                     <a href="#team" class="text-foreground hover:text-primary transition-colors">Team</a>
                     <a href="#contact" class="text-foreground hover:text-primary transition-colors">Contact</a>
-                    <a href="#contact" class="text-foreground hover:text-primary transition-colors">Login</a>
-                    <a href="#contact" class="text-foreground hover:text-primary transition-colors">Sign up</a>
+                    <a href="{{ route('login') }}" class="text-foreground hover:text-primary transition-colors">Login</a>
+                    {{-- <a href="#contact" class="text-foreground hover:text-primary transition-colors">Sign up</a> --}}
                 </div>
             </div>
         </div>
