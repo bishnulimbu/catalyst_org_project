@@ -12,6 +12,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -124,6 +126,19 @@
 </head>
 
 <body class="min-h-screen bg-white text-gray-900 antialiased font-sans">
+
+    <div x-data="{
+        show: @js(session()->has('status')),
+        message: @js(session('status')['message'] ?? ''),
+        type: @js(session('status')['type'] ?? 'success'),
+        get bgColor() {
+            return this.type === 'success' ? 'bg-green-500' : 'bg-red-500';
+        }
+    }" x-show="show" x-transition x-init="if (show) setTimeout(() => show = false, 5000)" :class="bgColor"
+        class="fixed bottom-5 right-5 text-white px-4 py-2 rounded shadow-lg" style="display: none;">
+        <span x-text="message"></span>
+    </div>
+
     <!-- Navigation -->
     <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50">
         <div class="container mx-auto px-6 py-4">
@@ -259,7 +274,8 @@
                 <!-- Vision -->
                 <div class="card-hover rounded-lg border bg-white shadow-sm text-center p-8">
                     <div class="mx-auto mb-4 p-4 bg-orange-100 rounded-full w-fit">
-                        <svg class="h-8 w-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="h-8 w-8 text-orange-600" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                             <circle cx="12" cy="12" r="3"></circle>
                         </svg>
@@ -403,32 +419,33 @@
                     <h3 class="text-2xl text-orange-600 font-semibold mb-4">Send Us a Message</h3>
                     <p class="text-sm text-gray-600 mb-6">We'll get back to you within 24 hours</p>
 
-                    <form class="space-y-4">
+                    <form action="{{ route('contact.send') }}" method="POST" class="space-y-4">
+                        @csrf
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
                                 <label class="text-sm font-medium text-gray-700 block mb-1">First Name</label>
-                                <input type="text" placeholder="John"
+                                <input type="text" name="first_name" placeholder="John"
                                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
                             </div>
                             <div>
                                 <label class="text-sm font-medium text-gray-700 block mb-1">Last Name</label>
-                                <input type="text" placeholder="Doe"
+                                <input type="text" name="last_name" placeholder="Doe"
                                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
                             </div>
                         </div>
                         <div>
                             <label class="text-sm font-medium text-gray-700 block mb-1">Email</label>
-                            <input type="email" placeholder="john@example.com"
+                            <input type="email" name="email" placeholder="john@example.com"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
                         </div>
                         <div>
                             <label class="text-sm font-medium text-gray-700 block mb-1">Company</label>
-                            <input type="text" placeholder="Your Company"
+                            <input type="text" name="company" placeholder="Your Company"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
                         </div>
                         <div>
                             <label class="text-sm font-medium text-gray-700 block mb-1">Message</label>
-                            <textarea placeholder="Tell us about your project..." rows="4"
+                            <textarea name="message" placeholder="Tell us about your project..." rows="4"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent h-32"></textarea>
                         </div>
                         <button type="submit"
@@ -553,12 +570,12 @@
             });
         }
 
-        // Form submission handler
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Add form submission logic here
-            alert('Thank you for your message! We will get back to you soon.');
-        });
+        // // Form submission handler
+        // document.querySelector('form').addEventListener('submit', function(e) {
+        //     e.preventDefault();
+        //     // Add form submission logic here
+        //     alert('Thank you for your message! We will get back to you soon.');
+        // });
     </script>
 </body>
 
