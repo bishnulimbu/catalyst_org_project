@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProfileController;
@@ -20,6 +21,8 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function(){
     Route::resource('/member', MemberController::class);
 });
+
+Route::post('/contact/send',[ContactController::class, 'send'])->name('contact.send');
 
 
 require __DIR__.'/auth.php';
