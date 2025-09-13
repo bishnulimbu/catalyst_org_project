@@ -1,110 +1,91 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
-    {{-- <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
-
-    <title>OrganiCorp - Transforming the Future</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Catalyst Entrepreneur Society - Transforming the Future</title>
     <meta name="description"
-        content="Leading innovation and excellence in organizational development, creating sustainable solutions for tomorrow's challenges.">
-    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
+        content="Leading innovation and excellence in entrepreneurship, creating sustainable solutions for tomorrow's challenges.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <script src="{{ asset('js/app.js') }}"></script> --}}
-
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Custom CSS with Orange Theme Design System -->
+    <!-- Custom CSS -->
     <style>
-        /* Orange theme design system - All colors MUST be HSL */
+        /* Orange theme variables */
         :root {
-            /* Orange theme palette */
-            --background: 0 0% 100%;
-            --foreground: 221 39% 11%;
-            --card: 0 0% 100%;
-            --card-foreground: 221 39% 11%;
-            --popover: 0 0% 100%;
-            --popover-foreground: 221 39% 11%;
-
-            /* Orange primary colors */
             --primary: 24 95% 53%;
-            --primary-foreground: 0 0% 100%;
             --primary-light: 33 100% 63%;
             --primary-dark: 16 85% 45%;
-
-            /* Orange secondary palette */
-            --secondary: 33 100% 96%;
-            --secondary-foreground: 221 39% 11%;
-            --muted: 33 54% 94%;
-            --muted-foreground: 221 13% 46%;
-            --accent: 33 100% 93%;
-            --accent-foreground: 221 39% 11%;
-
-            /* Supporting colors */
-            --destructive: 0 84% 60%;
-            --destructive-foreground: 0 0% 98%;
-            --border: 33 54% 87%;
-            --input: 33 54% 87%;
-            --ring: 24 95% 53%;
-            --radius: 0.75rem;
-
-            /* Orange gradients */
-            --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 100%);
-            --gradient-hero: linear-gradient(135deg, hsl(var(--primary-dark)) 0%, hsl(var(--primary)) 50%, hsl(var(--primary-light)) 100%);
-            --gradient-subtle: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--accent)) 100%);
-
-            /* Professional shadows */
-            --shadow-soft: 0 4px 6px -1px hsl(var(--primary) / 0.1), 0 2px 4px -1px hsl(var(--primary) / 0.06);
-            --shadow-medium: 0 10px 15px -3px hsl(var(--primary) / 0.1), 0 4px 6px -2px hsl(var(--primary) / 0.05);
-            --shadow-large: 0 20px 25px -5px hsl(var(--primary) / 0.1), 0 10px 10px -5px hsl(var(--primary) / 0.04);
-
-            /* Smooth transitions */
-            --transition-base: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .dark {
-            --background: 222.2 84% 4.9%;
-            --foreground: 210 40% 98%;
-            --card: 222.2 84% 4.9%;
-            --card-foreground: 210 40% 98%;
-            --popover: 222.2 84% 4.9%;
-            --popover-foreground: 210 40% 98%;
-            --primary: 210 40% 98%;
-            --primary-foreground: 222.2 47.4% 11.2%;
-            --secondary: 217.2 32.6% 17.5%;
-            --secondary-foreground: 210 40% 98%;
-            --muted: 217.2 32.6% 17.5%;
-            --muted-foreground: 215 20.2% 65.1%;
-            --accent: 217.2 32.6% 17.5%;
-            --accent-foreground: 210 40% 98%;
-            --destructive: 0 62.8% 30.6%;
-            --destructive-foreground: 210 40% 98%;
-            --border: 217.2 32.6% 17.5%;
-            --input: 217.2 32.6% 17.5%;
-            --ring: 212.7 26.8% 83.9%;
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-50%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-slideInLeft {
+            animation: slideInLeft 1s ease forwards;
+        }
+
+        .animate-slideInRight {
+            animation: slideInRight 1s ease forwards;
+        }
+
+        .animate-slideInDown {
+            animation: slideInDown 1s ease forwards;
         }
 
         /* Component styles */
-        .hero-gradient {
-            background: var(--gradient-hero);
-        }
-
         .card-hover {
-            transition: var(--transition-smooth);
-            box-shadow: var(--shadow-soft);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
         .card-hover:hover {
             transform: translateY(-4px);
-            box-shadow: var(--shadow-medium);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
         .section-spacing {
@@ -117,17 +98,14 @@
             }
         }
 
-        .fade-in {
-            animation: fadeIn 0.6s ease-out forwards;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Logo placeholder styling */
+        .logo-placeholder {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #6b7280;
         }
     </style>
 
@@ -136,33 +114,8 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        background: 'hsl(var(--background))',
-                        foreground: 'hsl(var(--foreground))',
-                        card: 'hsl(var(--card))',
-                        'card-foreground': 'hsl(var(--card-foreground))',
-                        popover: 'hsl(var(--popover))',
-                        'popover-foreground': 'hsl(var(--popover-foreground))',
-                        primary: 'hsl(var(--primary))',
-                        'primary-foreground': 'hsl(var(--primary-foreground))',
-                        'primary-light': 'hsl(var(--primary-light))',
-                        'primary-dark': 'hsl(var(--primary-dark))',
-                        secondary: 'hsl(var(--secondary))',
-                        'secondary-foreground': 'hsl(var(--secondary-foreground))',
-                        muted: 'hsl(var(--muted))',
-                        'muted-foreground': 'hsl(var(--muted-foreground))',
-                        accent: 'hsl(var(--accent))',
-                        'accent-foreground': 'hsl(var(--accent-foreground))',
-                        destructive: 'hsl(var(--destructive))',
-                        'destructive-foreground': 'hsl(var(--destructive-foreground))',
-                        border: 'hsl(var(--border))',
-                        input: 'hsl(var(--input))',
-                        ring: 'hsl(var(--ring))',
-                    },
-                    borderRadius: {
-                        lg: 'var(--radius)',
-                        md: 'calc(var(--radius) - 2px)',
-                        sm: 'calc(var(--radius) - 4px)',
+                    fontFamily: {
+                        sans: ['Instrument Sans', 'system-ui', 'sans-serif'],
                     }
                 }
             }
@@ -170,374 +123,384 @@
     </script>
 </head>
 
-<body class="min-h-screen bg-background text-foreground antialiased">
+<body class="min-h-screen bg-white text-gray-900 antialiased font-sans">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50">
-        <div class="container mx-auto px-4 py-4">
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50">
+        <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold text-primary">CATALYST ORG</div>
-                <a href="#home" class="text-foreground hover:text-primary transition-colors">Dashboard</a>
-                <a href="#about" class="text-foreground hover:text-primary transition-colors">About</a>
-                <a href="#vision" class="text-foreground hover:text-primary transition-colors">Vision</a>
-                <a href="#team" class="text-foreground hover:text-primary transition-colors">Team</a>
-                <a href="#contact" class="text-foreground hover:text-primary transition-colors">Contact</a>
-                <a href="{{ route('login') }}" class="text-foreground hover:text-primary transition-colors">Login</a>
-                {{-- <a href="#contact" class="text-foreground hover:text-primary transition-colors">Sign up</a> --}}
+                <div class="flex items-center text-2xl font-bold">
+                    <div class="mr-4">
+                        <div class="w-8 h-8 rounded logo-placeholder text-xs">
+                            <img src="{{ asset('images/logo.png') }}" alt="Logo">
+                        </div>
+                    </div>
+                    <div class="tracking-wide text-gray-900">
+                        CATALYST ENTREPRENEUR SOCIETY
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#home" class="text-gray-700 hover:text-orange-500 transition-colors">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-orange-500 transition-colors">About</a>
+                    <a href="#vision" class="text-gray-700 hover:text-orange-500 transition-colors">Vision</a>
+                    <a href="#team" class="text-gray-700 hover:text-orange-500 transition-colors">Team</a>
+                    <a href="#contact" class="text-gray-700 hover:text-orange-500 transition-colors">Contact</a>
+                    <a href="#login" class="text-gray-700 hover:text-orange-500 transition-colors">Login</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button class="text-gray-700 hover:text-orange-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
-        </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center hero-gradient">
-        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-            style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')">
-        </div>
-        <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 fade-in">
-                CATALYST ENTREPRENUEUR SOCIETY
+    <section id="home"
+        class="relative min-h-screen flex items-center justify-start bg-gradient-to-br from-orange-500 to-orange-600 overflow-hidden">
+        <div class="relative z-10 text-white px-6 md:px-20 max-w-4xl">
+            <div class="flex justify-start mb-6">
+                <div class="w-20 h-20 rounded-lg logo-placeholder text-sm text-gray-600">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo">
+                </div>
+            </div>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 uppercase tracking-wide leading-tight">
+                CATALYST ENTREPRENEUR SOCIETY
             </h1>
-            <p class="text-xl md:text-2xl mb-8 fade-in opacity-90">
-                Leading innovation and excellence in organizational development, creating sustainable solutions for
-                tomorrow's challenges.
+            <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-2xl">
+                Empowering the next generation of entrepreneurs through innovation, collaboration, and sustainable
+                business solutions.
             </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#about"
+                    class="bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-center">
+                    Learn More
+                </a>
+                <a href="#contact"
+                    class="border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-orange-600 transition-colors text-center">
+                    Get Started
+                </a>
+            </div>
         </div>
+
+        <!-- Decorative elements -->
+        <div class="absolute bottom-10 right-10 flex space-x-2">
+            <div class="w-4 h-4 bg-red-400 rounded-full opacity-70"></div>
+            <div class="w-4 h-4 bg-orange-400 rounded-full opacity-70"></div>
+            <div class="w-8 h-8 bg-white rounded-full opacity-30"></div>
+        </div>
+        <div class="absolute bottom-0 left-0 w-1/3 h-24 bg-orange-600 opacity-30"></div>
+        <div class="absolute bottom-0 right-0 w-1/4 h-32 bg-orange-600 opacity-30 rounded-t-full"></div>
     </section>
 
-    <!-- About Us Section -->
-    <section id="about" class="section-spacing">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto">
-                <div
-                    class="card-hover rounded-lg border bg-gradient-to-br from-accent to-background border-primary/20 text-card-foreground shadow-sm">
-                    <div class="flex flex-col space-y-1.5 p-6 text-center">
-                        <h3 class="text-4xl font-bold text-primary mb-4">About CES</h3>
-                    </div>
-                    <div class="p-6 pt-0 text-center">
-                        <p class="text-lg text-muted-foreground leading-relaxed">
-                            OrganiCorp is a pioneering organization dedicated to revolutionizing how businesses operate
-                            and grow.
-                            With over a decade of experience, we specialize in organizational development, strategic
-                            planning,
-                            and sustainable growth solutions. Our team of experts works tirelessly to help organizations
-                            achieve their full potential while maintaining ethical standards and environmental
-                            responsibility.
-                        </p>
-                    </div>
+    <!-- About Section -->
+    <section id="about" class="relative bg-gradient-to-r from-orange-500 to-orange-400 py-16 px-6 overflow-hidden">
+        <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-8">
+            <!-- Left Circle Label -->
+            <div
+                class="flex-shrink-0 w-48 h-48 bg-gradient-to-b from-orange-600 to-orange-500 rounded-full flex items-center justify-center text-center text-white font-bold text-xl shadow-lg animate-slideInLeft">
+                <div class="px-4">
+                    <span class="block">About</span>
+                    <span class="block">CES</span>
                 </div>
+            </div>
+
+            <!-- Divider Line -->
+            <div class="hidden lg:block w-1 h-40 bg-white mx-6 animate-slideInDown"></div>
+
+            <!-- Right Content -->
+            <div class="text-white animate-slideInRight flex-1">
+                <h2 class="text-3xl font-bold mb-6 lg:hidden">About CES</h2>
+                <p class="leading-relaxed text-lg mb-4">
+                    The Catalyst Entrepreneurs Society is an innovative concept-based investor group with a broad
+                    scope for engaging in various business segments. This group is dedicated to inspiring and
+                    supporting young, innovative individuals in the business and entrepreneurial sectors.
+                </p>
+                <p class="leading-relaxed text-lg">
+                    The introduction of the Catalyst Entrepreneurs Society is a novel concept within our community,
+                    and its potential long-term impact on our society is significant. The society aims to establish
+                    an extensive entrepreneurial network throughout the country, fostering collaboration and
+                    innovation on a national scale.
+                </p>
             </div>
         </div>
     </section>
 
     <!-- Mission, Vision, Goals Section -->
-    <section id="vision" class="section-spacing bg-accent/50">
-        <div class="container mx-auto px-4">
+    <section id="vision" class="section-spacing bg-orange-50">
+        <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-primary mb-4">Our Foundation</h2>
-                <p class="text-lg text-muted-foreground">The principles that drive everything we do</p>
+                <h2 class="text-4xl font-bold text-orange-600 mb-4">Our Foundation</h2>
+                <p class="text-lg text-gray-600">The principles that drive everything we do</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Mission -->
-                <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm text-center">
-                    <div class="flex flex-col space-y-1.5 p-6">
-                        <div class="mx-auto mb-4 p-4 bg-primary/10 rounded-full w-fit">
-                            <svg class="h-8 w-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <circle cx="12" cy="12" r="6"></circle>
-                                <circle cx="12" cy="12" r="2"></circle>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl text-primary font-semibold leading-none tracking-tight">Mission</h3>
+                <div class="card-hover rounded-lg border bg-white shadow-sm text-center p-8">
+                    <div class="mx-auto mb-4 p-4 bg-orange-100 rounded-full w-fit">
+                        <svg class="h-8 w-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="6"></circle>
+                            <circle cx="12" cy="12" r="2"></circle>
+                        </svg>
                     </div>
-                    <div class="p-6 pt-0">
-                        <p class="text-muted-foreground">
-                            To empower organizations with innovative strategies and sustainable solutions that drive
-                            meaningful
-                            change and create lasting value for all stakeholders.
-                        </p>
-                    </div>
+                    <h3 class="text-2xl text-orange-600 font-semibold mb-4">Mission</h3>
+                    <p class="text-gray-600">
+                        To empower organizations with innovative strategies and sustainable solutions that drive
+                        meaningful change and create lasting value for all stakeholders.
+                    </p>
                 </div>
 
                 <!-- Vision -->
-                <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm text-center">
-                    <div class="flex flex-col space-y-1.5 p-6">
-                        <div class="mx-auto mb-4 p-4 bg-primary/10 rounded-full w-fit">
-                            <svg class="h-8 w-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl text-primary font-semibold leading-none tracking-tight">Vision</h3>
+                <div class="card-hover rounded-lg border bg-white shadow-sm text-center p-8">
+                    <div class="mx-auto mb-4 p-4 bg-orange-100 rounded-full w-fit">
+                        <svg class="h-8 w-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
                     </div>
-                    <div class="p-6 pt-0">
-                        <p class="text-muted-foreground">
-                            To be the global leader in organizational transformation, fostering a world where businesses
-                            thrive while contributing positively to society and the environment.
-                        </p>
-                    </div>
+                    <h3 class="text-2xl text-orange-600 font-semibold mb-4">Vision</h3>
+                    <p class="text-gray-600">
+                        To be the global leader in organizational transformation, fostering a world where businesses
+                        thrive while contributing positively to society and the environment.
+                    </p>
                 </div>
 
                 <!-- Goals -->
-                <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm text-center">
-                    <div class="flex flex-col space-y-1.5 p-6">
-                        <div class="mx-auto mb-4 p-4 bg-primary/10 rounded-full w-fit">
-                            <svg class="h-8 w-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <circle cx="12" cy="8" r="7"></circle>
-                                <polyline points="8.21,13.89 7,23 12,20 17,23 15.79,13.88"></polyline>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl text-primary font-semibold leading-none tracking-tight">Goals</h3>
+                <div class="card-hover rounded-lg border bg-white shadow-sm text-center p-8">
+                    <div class="mx-auto mb-4 p-4 bg-orange-100 rounded-full w-fit">
+                        <svg class="h-8 w-8 text-orange-600" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <circle cx="12" cy="8" r="7"></circle>
+                            <polyline points="8.21,13.89 7,23 12,20 17,23 15.79,13.88"></polyline>
+                        </svg>
                     </div>
-                    <div class="p-6 pt-0">
-                        <p class="text-muted-foreground">
-                            To achieve excellence in service delivery, maintain 100% client satisfaction, and expand our
-                            positive impact to 1000+ organizations worldwide by 2030.
-                        </p>
-                    </div>
+                    <h3 class="text-2xl text-orange-600 font-semibold mb-4">Goals</h3>
+                    <p class="text-gray-600">
+                        To achieve excellence in service delivery, maintain 100% client satisfaction, and expand our
+                        positive impact to 1000+ organizations worldwide by 2030.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Objectives Section -->
-    <section class="section-spacing">
-        <div class="container mx-auto px-4">
+    <section class="section-spacing bg-white">
+        <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-primary mb-4">Our Objectives</h2>
-                <p class="text-lg text-muted-foreground">Strategic priorities for organizational excellence</p>
+                <h2 class="text-4xl font-bold text-orange-600 mb-4">Our Objectives</h2>
+                <p class="text-lg text-gray-600">Strategic priorities for organizational excellence</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm">
-                    <div class="flex flex-col space-y-1.5 p-6">
-                        <svg class="h-8 w-8 text-primary mb-2" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <h3 class="text-lg font-semibold leading-none tracking-tight">Innovation Leadership</h3>
-                    </div>
-                    <div class="p-6 pt-0">
-                        <p class="text-sm text-muted-foreground">
-                            Drive cutting-edge solutions and stay ahead of industry trends
-                        </p>
-                    </div>
+                <div class="card-hover rounded-lg border bg-white shadow-sm p-6">
+                    <svg class="h-8 w-8 text-orange-500 mb-4" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <h3 class="text-lg font-semibold mb-2">Innovation Leadership</h3>
+                    <p class="text-sm text-gray-600">
+                        Drive cutting-edge solutions and stay ahead of industry trends
+                    </p>
                 </div>
 
-                <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm">
-                    <div class="flex flex-col space-y-1.5 p-6">
-                        <svg class="h-8 w-8 text-primary mb-2" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                        <h3 class="text-lg font-semibold leading-none tracking-tight">Client Success</h3>
-                    </div>
-                    <div class="p-6 pt-0">
-                        <p class="text-sm text-muted-foreground">
-                            Ensure every client achieves measurable growth and success
-                        </p>
-                    </div>
+                <div class="card-hover rounded-lg border bg-white shadow-sm p-6">
+                    <svg class="h-8 w-8 text-orange-500 mb-4" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <h3 class="text-lg font-semibold mb-2">Client Success</h3>
+                    <p class="text-sm text-gray-600">
+                        Ensure every client achieves measurable growth and success
+                    </p>
                 </div>
 
-                <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm">
-                    <div class="flex flex-col space-y-1.5 p-6">
-                        <svg class="h-8 w-8 text-primary mb-2" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="2" y1="12" x2="22" y2="12"></line>
-                            <path
-                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
-                            </path>
-                        </svg>
-                        <h3 class="text-lg font-semibold leading-none tracking-tight">Global Impact</h3>
-                    </div>
-                    <div class="p-6 pt-0">
-                        <p class="text-sm text-muted-foreground">
-                            Expand our influence to create positive worldwide change
-                        </p>
-                    </div>
+                <div class="card-hover rounded-lg border bg-white shadow-sm p-6">
+                    <svg class="h-8 w-8 text-orange-500 mb-4" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                        </path>
+                    </svg>
+                    <h3 class="text-lg font-semibold mb-2">Global Impact</h3>
+                    <p class="text-sm text-gray-600">
+                        Expand our influence to create positive worldwide change
+                    </p>
                 </div>
 
-                <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm">
-                    <div class="flex flex-col space-y-1.5 p-6">
-                        <svg class="h-8 w-8 text-primary mb-2" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <circle cx="12" cy="8" r="7"></circle>
-                            <polyline points="8.21,13.89 7,23 12,20 17,23 15.79,13.88"></polyline>
-                        </svg>
-                        <h3 class="text-lg font-semibold leading-none tracking-tight">Excellence Standard</h3>
-                    </div>
-                    <div class="p-6 pt-0">
-                        <p class="text-sm text-muted-foreground">
-                            Maintain the highest quality in all our services and deliverables
-                        </p>
-                    </div>
+                <div class="card-hover rounded-lg border bg-white shadow-sm p-6">
+                    <svg class="h-8 w-8 text-orange-500 mb-4" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <circle cx="12" cy="8" r="7"></circle>
+                        <polyline points="8.21,13.89 7,23 12,20 17,23 15.79,13.88"></polyline>
+                    </svg>
+                    <h3 class="text-lg font-semibold mb-2">Excellence Standard</h3>
+                    <p class="text-sm text-gray-600">
+                        Maintain the highest quality in all our services and deliverables
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Team Members Section -->
-    <section id="team" class="section-spacing bg-accent/50">
-        <div class="container mx-auto px-4">
+    <section id="team" class="section-spacing bg-orange-50">
+        <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-primary mb-4">Meet Our Team</h2>
-                <p class="text-lg text-muted-foreground">The passionate professionals driving our success</p>
+                <h2 class="text-4xl font-bold text-orange-600 mb-4">Meet Our Team</h2>
+                <p class="text-lg text-gray-600">The passionate professionals driving our success</p>
             </div>
 
-            @foreach($members as $member)
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm text-center">
-                    <div class="flex flex-col space-y-1.5 p-6">
+            <!-- Note: This section would need to be populated with actual team data -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach ($members as $member)
+                    <div class="card-hover rounded-lg border bg-white shadow-sm text-center p-8">
                         <div class="mx-auto mb-4">
-                            <img src="{{ asset('storage/'.$member->profile_picture) }}"
-                                alt="CEO - Sarah Johnson"
-                                class="w-24 h-24 rounded-full object-cover mx-auto border-4 border-primary/20">
+                            <div
+                                class="w-24 h-24 rounded-full bg-gray-200 mx-auto border-4 border-orange-200 overflow-hidden">
+                                <img src="{{ asset('storage/' . $member->profile_picture) }}" alt="Team Member Image"
+                                    class="w-full h-full object-cover rounded-full">
+                            </div>
                         </div>
-                        <h3 class="text-xl font-semibold leading-none tracking-tight">{{ $member->name }}</h3>
-                        <p class="text-primary font-semibold text-sm text-muted-foreground">{{ $member->role }}</p>
+                        <h3 class="text-xl font-semibold mb-2">{{ $member->name }}</h3>
+                        <p class="text-orange-600 font-semibold text-sm">{{ $member->role }}</p>
                     </div>
-                </div>
                 @endforeach
             </div>
+
         </div>
     </section>
 
-    <!-- Get in Touch Section -->
-    <section id="contact" class="section-spacing">
-        <div class="container mx-auto px-4">
+    <!-- Contact Section -->
+    <section id="contact" class="section-spacing bg-white">
+        <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-primary mb-4">Get in Touch</h2>
-                <p class="text-lg text-muted-foreground">Ready to transform your organization? Let's start the
-                    conversation.</p>
+                <h2 class="text-4xl font-bold text-orange-600 mb-4">Get in Touch</h2>
+                <p class="text-lg text-gray-600">Ready to transform your organization? Let's start the conversation.
+                </p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-12">
                 <!-- Contact Form -->
-                <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm">
-                    <div class="flex flex-col space-y-1.5 p-6">
-                        <h3 class="text-2xl text-primary font-semibold leading-none tracking-tight">Send Us a Message
-                        </h3>
-                        <p class="text-sm text-muted-foreground">We'll get back to you within 24 hours</p>
-                    </div>
-                    <div class="p-6 pt-0 space-y-4">
-                        <form>
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="text-sm font-medium text-foreground">First Name</label>
-                                    <input type="text" placeholder="John"
-                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-1">
-                                </div>
-                                <div>
-                                    <label class="text-sm font-medium text-foreground">Last Name</label>
-                                    <input type="text" placeholder="Doe"
-                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-1">
-                                </div>
+                <div class="card-hover rounded-lg border bg-white shadow-sm p-8">
+                    <h3 class="text-2xl text-orange-600 font-semibold mb-4">Send Us a Message</h3>
+                    <p class="text-sm text-gray-600 mb-6">We'll get back to you within 24 hours</p>
+
+                    <form class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-sm font-medium text-gray-700 block mb-1">First Name</label>
+                                <input type="text" placeholder="John"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
                             </div>
                             <div>
-                                <label class="text-sm font-medium text-foreground">Email</label>
-                                <input type="email" placeholder="john@example.com"
-                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-1">
+                                <label class="text-sm font-medium text-gray-700 block mb-1">Last Name</label>
+                                <input type="text" placeholder="Doe"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
                             </div>
-                            <div>
-                                <label class="text-sm font-medium text-foreground">Company</label>
-                                <input type="text" placeholder="Your Company"
-                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-1">
-                            </div>
-                            <div>
-                                <label class="text-sm font-medium text-foreground">Message</label>
-                                <textarea placeholder="Tell us about your project..." rows="4"
-                                    class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-1 h-32"></textarea>
-                            </div>
-                            <button type="submit"
-                                class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary-dark h-10 px-4 py-2 w-full">
-                                Send Message
-                            </button>
-                        </form>
-                    </div>
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium text-gray-700 block mb-1">Email</label>
+                            <input type="email" placeholder="john@example.com"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium text-gray-700 block mb-1">Company</label>
+                            <input type="text" placeholder="Your Company"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium text-gray-700 block mb-1">Message</label>
+                            <textarea placeholder="Tell us about your project..." rows="4"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent h-32"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-orange-500 text-white py-3 px-4 rounded-md hover:bg-orange-600 transition-colors font-semibold">
+                            Send Message
+                        </button>
+                    </form>
                 </div>
 
                 <!-- Contact Information -->
-                <div class="space-y-8">
-                    <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm">
-                        <div class="p-6">
-                            <div class="flex items-center space-x-4">
-                                <div class="p-3 bg-primary/10 rounded-full">
-                                    <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path
-                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                                        </path>
-                                        <polyline points="22,6 12,13 2,6"></polyline>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold text-foreground">Email Us</h3>
-                                    <p class="text-muted-foreground">hello@organicorp.com</p>
-                                </div>
+                <div class="space-y-6">
+                    <div class="card-hover rounded-lg border bg-white shadow-sm p-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-3 bg-orange-100 rounded-full">
+                                <svg class="h-6 w-6 text-orange-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">Email Us</h3>
+                                <p class="text-gray-600">info@catalystentrepreneurs.com</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm">
-                        <div class="p-6">
-                            <div class="flex items-center space-x-4">
-                                <div class="p-3 bg-primary/10 rounded-full">
-                                    <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path
-                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold text-foreground">Call Us</h3>
-                                    <p class="text-muted-foreground">+1 (555) 123-4567</p>
-                                </div>
+                    <div class="card-hover rounded-lg border bg-white shadow-sm p-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-3 bg-orange-100 rounded-full">
+                                <svg class="h-6 w-6 text-orange-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">Call Us</h3>
+                                <p class="text-gray-600">+1 (555) 123-4567</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card-hover rounded-lg border bg-card text-card-foreground shadow-sm">
-                        <div class="p-6">
-                            <div class="flex items-center space-x-4">
-                                <div class="p-3 bg-primary/10 rounded-full">
-                                    <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                        <circle cx="12" cy="10" r="3"></circle>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold text-foreground">Visit Us</h3>
-                                    <p class="text-muted-foreground">123 Innovation Drive<br>Tech City, TC 12345</p>
-                                </div>
+                    <div class="card-hover rounded-lg border bg-white shadow-sm p-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-3 bg-orange-100 rounded-full">
+                                <svg class="h-6 w-6 text-orange-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">Visit Us</h3>
+                                <p class="text-gray-600">123 Innovation Drive<br>Business City, BC 12345</p>
                             </div>
                         </div>
                     </div>
 
-                    <div
-                        class="card-hover bg-gradient-to-br from-primary to-primary-light text-white rounded-lg border shadow-sm">
-                        <div class="p-6">
-                            <h3 class="font-semibold text-xl mb-2">Ready to Get Started?</h3>
-                            <p class="mb-4 opacity-90">
-                                Schedule a free consultation to discuss your organization's goals and how we can help
-                                achieve them.
-                            </p>
-                            <button
-                                class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2 text-primary hover:text-primary-dark">
-                                Schedule Consultation
-                            </button>
-                        </div>
+                    <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-lg shadow-sm p-6">
+                        <h3 class="font-semibold text-xl mb-2">Ready to Get Started?</h3>
+                        <p class="mb-4 opacity-90">
+                            Schedule a free consultation to discuss your organization's goals and how we can help
+                            achieve them.
+                        </p>
+                        <button
+                            class="bg-white text-orange-600 px-6 py-2 rounded-md hover:bg-gray-100 transition-colors font-semibold">
+                            Schedule Consultation
+                        </button>
                     </div>
                 </div>
             </div>
@@ -545,17 +508,23 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-card border-t border-border">
-        <div class="container mx-auto px-4 py-8">
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-12">
             <div class="text-center">
-                <div class="text-2xl font-bold text-primary mb-4">OrganiCorp</div>
-                <p class="text-muted-foreground mb-4">Transforming organizations for a better tomorrow</p>
-                <p class="text-sm text-muted-foreground">&copy; 2024 OrganiCorp. All rights reserved.</p>
+                <div class="text-2xl font-bold text-orange-500 mb-4">Catalyst Entrepreneur Society</div>
+                <p class="text-gray-400 mb-4">Transforming organizations for a better tomorrow</p>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">Terms of
+                        Service</a>
+                    <a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">Support</a>
+                </div>
+                <p class="text-sm text-gray-500">&copy; 2024 Catalyst Entrepreneur Society. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Smooth scrolling script -->
+    <!-- JavaScript -->
     <script>
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -563,30 +532,32 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // Add fade-in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                }
+        // Mobile menu toggle (if you want to add mobile menu functionality)
+        const mobileMenuButton = document.querySelector('button');
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', function() {
+                // Add mobile menu toggle logic here
+                console.log('Mobile menu clicked');
             });
-        }, observerOptions);
+        }
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
+        // Form submission handler
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add form submission logic here
+            alert('Thank you for your message! We will get back to you soon.');
         });
     </script>
 </body>
