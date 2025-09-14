@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hero;
 use App\Models\Member;
-
+use App\Models\Objective;
 use Illuminate\Http\Request;
 
 class HomePageController extends Controller
@@ -14,6 +15,13 @@ class HomePageController extends Controller
     public function index()
     {
         return view('welcome')->with('members', Member::all());
+    }
+    
+    public function edit(){
+        // return view('admin.pages.edit',[
+        //     'hero'=>Hero::all(),
+        //     'objectives'=>Objective::first(),
+        // ]);
     }
 
     /**
@@ -43,10 +51,6 @@ class HomePageController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
