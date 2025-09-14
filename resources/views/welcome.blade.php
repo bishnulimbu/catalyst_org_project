@@ -159,7 +159,7 @@
                     <a href="#vision" class="text-gray-700 hover:text-orange-500 transition-colors">Vision</a>
                     <a href="#team" class="text-gray-700 hover:text-orange-500 transition-colors">Team</a>
                     <a href="#contact" class="text-gray-700 hover:text-orange-500 transition-colors">Contact</a>
-                    <a href="#login" class="text-gray-700 hover:text-orange-500 transition-colors">Login</a>
+                    <a href="{{ route('login') }}" class="text-gray-700 hover:text-orange-500 transition-colors">Login</a>
                 </div>
 
                 <!-- Mobile menu button -->
@@ -419,7 +419,7 @@
                     <h3 class="text-2xl text-orange-600 font-semibold mb-4">Send Us a Message</h3>
                     <p class="text-sm text-gray-600 mb-6">We'll get back to you within 24 hours</p>
 
-                    <form action="{{ route('contact.send') }}" method="POST" class="space-y-4">
+                    <form action="{{ route('contact.send') }}" method="POST" onsubmit="return confirmSendMessage()" class="space-y-4">
                         @csrf
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
@@ -469,8 +469,11 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-gray-900">Email Us</h3>
-                                <p class="text-gray-600">info@catalystentrepreneurs.com</p>
+                                <h3 class="font-semibold text-gray-900">Contact Us</h3>
+                                <a href="https://www.cesnepal.org" target="_blank" class="hover:underline">
+                                    www.cesnepal.org
+                                </a>
+                                <p class="text-gray-600">cesnepal2080@gmail.com</p>
                             </div>
                         </div>
                     </div>
@@ -487,7 +490,8 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-gray-900">Call Us</h3>
-                                <p class="text-gray-600">+1 (555) 123-4567</p>
+                                <p class="text-gray-600">+977 981-4099804</p>
+                                <p class="text-gray-600">+977 980-1444218</p>
                             </div>
                         </div>
                     </div>
@@ -503,7 +507,7 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-gray-900">Visit Us</h3>
-                                <p class="text-gray-600">123 Innovation Drive<br>Business City, BC 12345</p>
+                                <p class="text-gray-600">Birtamode Municpaltity<br>Jhapa,Nepal</p>
                             </div>
                         </div>
                     </div>
@@ -569,13 +573,14 @@
                 console.log('Mobile menu clicked');
             });
         }
-
-        // // Form submission handler
-        // document.querySelector('form').addEventListener('submit', function(e) {
-        //     e.preventDefault();
-        //     // Add form submission logic here
-        //     alert('Thank you for your message! We will get back to you soon.');
-        // });
+        
+        function confirmSendMessage() {
+            if (confirm("Are you sure you want to send this message?")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     </script>
 </body>
 
