@@ -34,7 +34,7 @@
     </div>
 
     {{-- Objectives Editor --}}
-    {{-- <div class="bg-white shadow rounded p-4 mb-6">
+    <div class="bg-white shadow rounded p-4 mb-6">
         <h2 class="text-xl font-semibold mb-3">Objectives</h2>
         <a href="{{ route('objectives.create') }}" class="bg-green-600 text-white px-3 py-1 rounded">+ Add Objective</a>
 
@@ -52,6 +52,6 @@
                 </li>
             @endforeach
         </ul>
-    </div> --}}
+    </div>
 </div>
 @endsection
