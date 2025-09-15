@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Hero;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HeroController extends Controller
 {
@@ -18,24 +19,36 @@ class HeroController extends Controller
      */
     public function update(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
+        $hero = Hero::first(); // adjust if you have multiple heroes
+
+        $data = $request->validate([
+            'title' => 'nullable|string|max:255',
             'subtitles' => 'nullable|string|max:255',
             'background_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        $data = $request->only(['title', 'subtitles']);
-
+        // Handle image upload
         if ($request->hasFile('background_image')) {
-            $path = $request->file('background_image')->store('hero', 'public');
-            $data['background_image'] = $path;
+            // Delete old image
+            if ($hero && $hero->background_image && Storage::disk('public')->exists($hero->background_image)) {
+                Storage::delete('public' . $hero->background_image);
+            }
+
+            // Store new image
+            $data['background_image'] = $request->file('background_image')->store('hero', 'public');
         }
 
-        Hero::updateOrCreate(
-            ['id' => 1],
-            $data
-        );
-        return redirect()->route('dashboard')->with('success', 'Hero Updated Successfully');
+        // Handle delete request
+        if ($request->input('delete_image')) {
+            if ($hero && $hero->background_image && Storage::disk('public')->exists($hero->background_image)) {
+                Storage::delete('public' . $hero->background_image);
+            }
+            $data['background_image'] = null;
+        }
+
+        $hero->update($data);
+
+        return redirect('dashboard')->with('success', 'Hero section updated successfully.');
     }
 
     /**
