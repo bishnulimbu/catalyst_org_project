@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HeroController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\MemberController;
@@ -10,9 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomePageController::class, 'index']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -27,7 +26,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/hero/edit',[HeroController::class,'edit'])->name('hero.edit')->middleware('auth');
 Route::put('/hero/update',[HeroController::class, 'update'])->name('hero.update')->middleware('auth');
-Route::resource('/objective', ObjectiveController::class)->middleware('auth');
+Route::resource('objectives', ObjectiveController::class)->middleware('auth');
 
 
 require __DIR__ . '/auth.php';
