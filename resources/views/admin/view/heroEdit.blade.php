@@ -1,57 +1,77 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto p-6">
-    <h1 class="text-2xl font-bold mb-6">Edit Homepage</h1>
+    <div class="container mx-auto p-6">
+        <h1 class="text-2xl font-bold mb-6">Edit Homepage</h1>
 
-    {{-- Flash message --}}
-    @if(session('success'))
-        <div class="bg-green-100 text-green-800 p-3 rounded mb-4">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    {{-- Hero Editor --}}
-    <div class="bg-white shadow rounded p-4 mb-6">
-        <h2 class="text-xl font-semibold mb-3">Hero Section</h2>
-        <form action="{{ route('hero.update') }}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="mb-3">
-                <label class="block text-gray-700">Title</label>
-                <input type="text" name="title" value="{{ $hero->title ?? '' }}" class="w-full border p-2 rounded">
+        {{-- Flash message --}}
+        @if (session('success'))
+            <div class="bg-green-100 text-green-800 p-3 rounded mb-4">
+                {{ session('success') }}
             </div>
-            <div class="mb-3">
-                <label class="block text-gray-700">Subtitle</label>
-                <input type="text" name="subtitles" value="{{ $hero->subtitles ?? '' }}" class="w-full border p-2 rounded">
-            </div>
-            <div class="mb-3">
-                <label class="block text-gray-700">Background Image URL</label>
-                <input type="text" name="background_image" value="{{ $hero->background_image ?? '' }}" class="w-full border p-2 rounded">
-            </div>
-            <button class="bg-blue-600 text-white px-4 py-2 rounded">Save Hero</button>
-        </form>
-    </div>
+        @endif
 
-    {{-- Objectives Editor --}}
-    <div class="bg-white shadow rounded p-4 mb-6">
-        <h2 class="text-xl font-semibold mb-3">Objectives</h2>
-        <a href="{{ route('objectives.create') }}" class="bg-green-600 text-white px-3 py-1 rounded">+ Add Objective</a>
+        {{-- Hero Editor --}}
+        <div class="bg-white shadow rounded p-4 mb-6" x-data="{ open: false, preview: '{{ $hero->background_image ? asset('storage/' . $hero->background_image) : '' }}' }">
+            <h2 class="text-xl font-semibold mb-3">Hero Section</h2>
+            <form action="{{ route('hero.update') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
 
-        <ul class="mt-4 space-y-2">
-            @foreach($objectives as $objective)
-                <li class="flex justify-between items-center border-b py-2">
-                    <span>{{ $objective->title }}</span>
-                    <div class="space-x-2">
-                        <a href="{{ route('objectives.edit', $objective->id) }}" class="text-blue-600">Edit</a>
-                        <form action="{{ route('objectives.destroy', $objective->id) }}" method="POST" class="inline">
-                            @csrf @method('DELETE')
-                            <button class="text-red-600">Delete</button>
-                        </form>
+                {{-- Title --}}
+                <div class="mb-3">
+                    <label class="block text-gray-700">Title</label>
+                    <input type="text" name="title" value="{{ $hero->title ?? '' }}" class="w-full border p-2 rounded">
+                </div>
+
+                {{-- Subtitle --}}
+                <div class="mb-3">
+                    <label class="block text-gray-700">Subtitle</label>
+                    <input type="text" name="subtitles" value="{{ $hero->subtitles ?? '' }}"
+                        class="w-full border p-2 rounded">
+                </div>
+
+                {{-- Image Preview --}}
+                <div class="mb-3 relative group">
+                    <p class="text-sm text-gray-600 mb-1">Background Image Preview:</p>
+
+                    <div class="relative cursor-pointer w-full h-40" @click="open = true">
+                        <template x-if="preview">
+                            <img :src="preview" alt="Hero Background"
+                                class="w-full h-40 object-cover rounded border">
+                        </template>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-25 opacity-0 group-hover:opacity-100 transition-opacity rounded">
+                            <span class="text-white text-3xl font-bold">+</span>
+                        </div>
                     </div>
-                </li>
-            @endforeach
-        </ul>
+
+                    {{-- Modal --}}
+                    <div x-show="open" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+                        x-transition style="display: none;">
+                        <div class="relative">
+                            <button type="button" @click="open = false"
+                                class="absolute top-2 right-2 text-white text-3xl font-bold">&times;</button>
+                            <img :src="preview" alt="Hero Background" class="max-h-[80vh] rounded shadow-lg">
+                        </div>
+                    </div>
+                </div>
+
+                {{-- File input --}}
+                <div class="mb-3">
+                    <label for="background_image" class="block text-sm font-medium text-gray-700">
+                        Change Background Image
+                    </label>
+                    <input type="file" name="background_image" id="background_image"
+                        @change="preview = URL.createObjectURL($event.target.files[0])"
+                        class="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                </div>
+
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    Save Hero
+                </button>
+            </form>
+        </div>
     </div>
-</div>
 @endsection
+
