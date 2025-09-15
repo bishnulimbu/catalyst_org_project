@@ -7,32 +7,54 @@ use Illuminate\Http\Request;
 
 class ObjectiveController extends Controller
 {
-    public function edit()
+    // Show all objectives (index page)
+    // public function index()
+    // {
+    //     $objectives = Objective::latest()->paginate(10); // paginate if many
+    //     return view('admin.view.objectiveIndex', compact('objectives'));
+    // }
+
+    // Show the form for creating a new objective
+    public function create()
     {
-        $objective = Objective::first();
-        return view('objective.edit', compact('objective'));
+        return view('admin.view.objectiveCreate');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request)
+    // Store a newly created objective in the database
+    public function store(Request $request)
     {
         $request->validate([
             'content' => 'required|string|max:255',
         ]);
-        Objective::updateOrCreate(
-            ['id' => 1],
-            $request->only(['content'])
-        );
-        return redirect()->route('dashboard')->with('success', 'Objective Updated Successfully');
+
+        Objective::create($request->only('content'));
+
+        return redirect()->route('dashboard')->with('success', 'Objective created successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    // Show the form for editing a specific objective
+    public function edit(Objective $objective)
     {
-        //
+        return view('admin.view.objectiveEdit', compact('objective'));
+    }
+
+    // Update the specified objective in the database
+    public function update(Request $request, Objective $objective)
+    {
+        $request->validate([
+            'content' => 'required|string|max:255',
+        ]);
+
+        $objective->update($request->only('content'));
+
+        return redirect()->route('objectives.index')->with('success', 'Objective updated successfully!');
+    }
+
+    // Remove the specified objective from the database
+    public function destroy(Objective $objective)
+    {
+        $objective->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Objective deleted successfully!');
     }
 }
