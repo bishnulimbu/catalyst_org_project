@@ -185,11 +185,10 @@
                 </div>
             </div>
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 uppercase tracking-wide leading-tight">
-                CATALYST ENTREPRENEUR SOCIETY
+            {{ $hero->title }}
             </h1>
             <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-2xl">
-                Empowering the next generation of entrepreneurs through innovation, collaboration, and sustainable
-                business solutions.
+            {{ $hero->subtitle }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4">
                 <a href="#about"
@@ -334,6 +333,7 @@
                     </p>
                 </div>
 
+                @foreach($objectives as $objective)
                 <div class="card-hover rounded-lg border bg-white shadow-sm p-6">
                     <svg class="h-8 w-8 text-orange-500 mb-4" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
@@ -342,9 +342,10 @@
                     </svg>
                     <h3 class="text-lg font-semibold mb-2">Client Success</h3>
                     <p class="text-sm text-gray-600">
-                        Ensure every client achieves measurable growth and success
+                    {{ $objective->title }}
                     </p>
                 </div>
+                @endforeach
 
                 <div class="card-hover rounded-lg border bg-white shadow-sm p-6">
                     <svg class="h-8 w-8 text-orange-500 mb-4" fill="none" stroke="currentColor"
