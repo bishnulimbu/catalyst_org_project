@@ -14,7 +14,10 @@ class HomePageController extends Controller
      */
     public function index()
     {
-        return view('welcome')->with('members', Member::all());
+        $members = Member::all();
+        $hero= Hero::first();
+        $objectives= Objective::all();
+        return view('welcome',compact('members','hero','objectives'));
     }
     
     public function edit(){
