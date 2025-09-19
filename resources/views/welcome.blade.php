@@ -159,7 +159,8 @@
                     <a href="#vision" class="text-gray-700 hover:text-orange-500 transition-colors">Vision</a>
                     <a href="#team" class="text-gray-700 hover:text-orange-500 transition-colors">Team</a>
                     <a href="#contact" class="text-gray-700 hover:text-orange-500 transition-colors">Contact</a>
-                    <a href="{{ route('login') }}" class="text-gray-700 hover:text-orange-500 transition-colors">Login</a>
+                    <a href="{{ route('login') }}"
+                        class="text-gray-700 hover:text-orange-500 transition-colors">Login</a>
                 </div>
 
                 <!-- Mobile menu button -->
@@ -178,6 +179,12 @@
     <!-- Hero Section -->
     <section id="home"
         class="relative min-h-screen flex items-center justify-start bg-gradient-to-br from-orange-500 to-orange-600 overflow-hidden">
+        <!-- Background image -->
+        <img src="{{ asset('storage/' . $hero->background_image) }}" alt="Hero Background"
+            class="absolute inset-0 w-full h-full object-cover z-0 opacity-70">
+
+        <!-- Gradient overlay (optional if you still want orange tint) -->
+        <div class="absolute inset-0 bg-gradient-to-br from-orange-500 to-orange-600 opacity-60 z-0"></div>
         <div class="relative z-10 text-white px-6 md:px-20 max-w-4xl">
             <div class="flex justify-start mb-6">
                 <div class="w-20 h-20 rounded-lg logo-placeholder text-sm text-gray-600">
@@ -185,10 +192,10 @@
                 </div>
             </div>
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 uppercase tracking-wide leading-tight">
-            {{ $hero->title }}
+                {{ $hero->title }}
             </h1>
             <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-2xl">
-            {{ $hero->subtitle }}
+                {{ $hero->subtitles }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4">
                 <a href="#about"
@@ -333,46 +340,20 @@
                     </p>
                 </div>
 
-                @foreach($objectives as $objective)
-                <div class="card-hover rounded-lg border bg-white shadow-sm p-6">
-                    <svg class="h-8 w-8 text-orange-500 mb-4" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                    <h3 class="text-lg font-semibold mb-2">Client Success</h3>
-                    <p class="text-sm text-gray-600">
-                    {{ $objective->title }}
-                    </p>
-                </div>
+                @foreach ($objectives as $objective)
+                    <div class="card-hover rounded-lg border bg-white shadow-sm p-6">
+                        <svg class="h-8 w-8 text-orange-500 mb-4" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <h3 class="text-lg font-semibold mb-2">Client Success</h3>
+                        <p class="text-sm text-gray-600">
+                            {{ $objective->title }}
+                        </p>
+                    </div>
                 @endforeach
 
-                <div class="card-hover rounded-lg border bg-white shadow-sm p-6">
-                    <svg class="h-8 w-8 text-orange-500 mb-4" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="2" y1="12" x2="22" y2="12"></line>
-                        <path
-                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
-                        </path>
-                    </svg>
-                    <h3 class="text-lg font-semibold mb-2">Global Impact</h3>
-                    <p class="text-sm text-gray-600">
-                        Expand our influence to create positive worldwide change
-                    </p>
-                </div>
-
-                <div class="card-hover rounded-lg border bg-white shadow-sm p-6">
-                    <svg class="h-8 w-8 text-orange-500 mb-4" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <circle cx="12" cy="8" r="7"></circle>
-                        <polyline points="8.21,13.89 7,23 12,20 17,23 15.79,13.88"></polyline>
-                    </svg>
-                    <h3 class="text-lg font-semibold mb-2">Excellence Standard</h3>
-                    <p class="text-sm text-gray-600">
-                        Maintain the highest quality in all our services and deliverables
-                    </p>
-                </div>
             </div>
         </div>
     </section>
@@ -420,7 +401,8 @@
                     <h3 class="text-2xl text-orange-600 font-semibold mb-4">Send Us a Message</h3>
                     <p class="text-sm text-gray-600 mb-6">We'll get back to you within 24 hours</p>
 
-                    <form action="{{ route('contact.send') }}" method="POST" onsubmit="return confirmSendMessage()" class="space-y-4">
+                    <form action="{{ route('contact.send') }}" method="POST" onsubmit="return confirmSendMessage()"
+                        class="space-y-4">
                         @csrf
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
@@ -574,7 +556,7 @@
                 console.log('Mobile menu clicked');
             });
         }
-        
+
         function confirmSendMessage() {
             if (confirm("Are you sure you want to send this message?")) {
                 return true;
