@@ -18,6 +18,29 @@ class HeroController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'nullable|string|max:255',
+            'subtitles' => 'nullable|string|max:255',
+            'background_image' => 'nullable|image|max:2048', // optional
+        ]);
+
+        $hero = new Hero;
+
+        $hero->title = $request->title;
+        $hero->subtitles = $request->subtitles;
+
+        if ($request->hasFile('background_image')) {
+            $path = $request->file('background_image')->store('heroes', 'public');
+            $hero->background_image = $path;
+        }
+
+        $hero->save();
+
+        return redirect()->route('dashboard')->with('success', 'Hero created successfully!');
+    }
+
     public function update(Request $request)
     {
         $request->validate([

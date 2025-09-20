@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Hero;
 use App\Models\Objective;
+use App\Models\Scope;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -15,7 +16,9 @@ class DashboardController extends Controller
     {
         $hero = Hero::first();
         $objectives = Objective::all();
-        return view('dashboard', compact('hero', 'objectives'));
+        $scopes = Scope::all();
+
+        return view('dashboard', compact('hero', 'objectives', 'scopes'));
     }
 
     /**
