@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('objectives', function (Blueprint $table) {
             $table->id();
             $table->string('content');
+            $table->string('logo')->nullable()->default('target');
             $table->timestamps();
         });
     }

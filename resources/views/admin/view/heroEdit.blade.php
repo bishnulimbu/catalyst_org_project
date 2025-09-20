@@ -14,7 +14,7 @@
         {{-- Hero Editor --}}
         <div class="bg-white shadow rounded p-4 mb-6" x-data="{
             open: false,
-            preview: '{{ $hero->background_image ? asset('storage/' . $hero->background_image) : '' }}',
+            preview: '{{ $hero?->background_image ? asset('storage/' . $hero->background_image) : '' }}',
             showDeleteAlert: false
         }" @keydown.escape.window="open = false">
             <h2 class="text-xl font-semibold mb-3">Hero Section</h2>
@@ -26,9 +26,12 @@
                 <button @click="showDeleteAlert = false" class="float-right font-bold">&times;</button>
             </div>
 
-            <form action="{{ route('hero.update') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ $hero ? route('hero.update', $hero->id) : route('hero.store') }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
+                @if ($hero)
+                    @method('PUT')
+                @endif
 
                 {{-- Title --}}
                 <div class="mb-3">
