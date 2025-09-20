@@ -11,6 +11,7 @@ class HeroController extends Controller
     public function edit()
     {
         $hero = Hero::first();
+
         return view('admin.view.heroEdit', compact('hero'));
     }
 
@@ -19,34 +20,37 @@ class HeroController extends Controller
      */
     public function update(Request $request)
     {
-        $hero = Hero::first(); // adjust if you have multiple heroes
-
-        $data = $request->validate([
+        $request->validate([
             'title' => 'nullable|string|max:255',
             'subtitles' => 'nullable|string|max:255',
-            'background_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'background_image' => 'nullable|image|max:2048',
+            'delete_image' => 'nullable|boolean',
         ]);
 
-        // Handle image upload
-        if ($request->hasFile('background_image')) {
-            // Delete old image
-            if ($hero && $hero->background_image && Storage::disk('public')->exists($hero->background_image)) {
-                Storage::delete('public' . $hero->background_image);
-            }
+        $hero = Hero::first();
 
-            // Store new image
-            $data['background_image'] = $request->file('background_image')->store('hero', 'public');
+        if (! $hero) {
+            $hero = new Hero;
         }
 
-        // Handle delete request
-        if ($request->input('delete_image')) {
-            if ($hero && $hero->background_image && Storage::disk('public')->exists($hero->background_image)) {
-                Storage::delete('public' . $hero->background_image);
+        $hero->title = $request->title;
+        $hero->subtitles = $request->subtitles;
+
+        // handle image upload
+        if ($request->delete_image) {
+            if ($hero->background_image && Storage::exists($hero->background_image)) {
+                Storage::delete($hero->background_image);
             }
-            $data['background_image'] = null;
+            $hero->background_image = null;
+        } elseif ($request->hasFile('background_image')) {
+            if ($hero->background_image && Storage::exists($hero->background_image)) {
+                Storage::delete($hero->background_image);
+            }
+            $path = $request->file('background_image')->store('hero-images', 'public');
+            $hero->background_image = $path;
         }
 
-        $hero->update($data);
+        $hero->save();
 
         return redirect('dashboard')->with('success', 'Hero section updated successfully.');
     }
@@ -56,6 +60,16 @@ class HeroController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $hero = Hero::findOrFail($id);
+
+        // Delete the background image from storage
+        if ($hero->background_image && Storage::exists($hero->background_image)) {
+            Storage::delete($hero->background_image);
+        }
+
+        // Delete the hero record
+        $hero->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Hero section deleted successfully!');
     }
 }

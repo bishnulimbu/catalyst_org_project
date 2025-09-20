@@ -7,13 +7,6 @@ use Illuminate\Http\Request;
 
 class ObjectiveController extends Controller
 {
-    // Show all objectives (index page)
-    // public function index()
-    // {
-    //     $objectives = Objective::latest()->paginate(10); // paginate if many
-    //     return view('admin.view.objectiveIndex', compact('objectives'));
-    // }
-
     // Show the form for creating a new objective
     public function create()
     {
@@ -25,9 +18,13 @@ class ObjectiveController extends Controller
     {
         $request->validate([
             'content' => 'required|string|max:255',
+            'logo' => 'nullable|string|max:100',
         ]);
 
-        Objective::create($request->only('content'));
+        Objective::create([
+            'content' => $request->content,
+            'logo' => $request->logo ?? 'target', // default if not selected
+        ]);
 
         return redirect()->route('dashboard')->with('success', 'Objective created successfully!');
     }
@@ -43,9 +40,13 @@ class ObjectiveController extends Controller
     {
         $request->validate([
             'content' => 'required|string|max:255',
+            'logo' => 'nullable|string|max:100',
         ]);
 
-        $objective->update($request->only('content'));
+        $objective->update([
+            'content' => $request->content,
+            'logo' => $request->logo ?? 'target', // handle default
+        ]);
 
         return redirect()->route('objectives.index')->with('success', 'Objective updated successfully!');
     }
