@@ -178,33 +178,67 @@
 
     <!-- Hero Section -->
     <section id="home"
-        class="relative min-h-screen flex items-center justify-start bg-gradient-to-br from-orange-500 to-orange-600 overflow-hidden">
-        <!-- Background image -->
-        <img src="{{ asset('storage/' . $hero->background_image) }}" alt="Hero Background"
-            class="absolute inset-0 w-full h-full object-cover z-0 opacity-70">
+        class="relative min-h-screen flex items-center justify-start bg-gradient-to-br from-orange-400 to-orange-500 overflow-hidden">
+        {{-- Hero background image --}}
+        @if (!empty($hero) && !empty($hero->background_image))
+            <img src="{{ asset('storage/' . $hero->background_image) }}" alt="Hero Background"
+                class="absolute inset-0 w-full h-full object-cover z-0 opacity-70">
+        @endif
 
-        <!-- Gradient overlay (optional if you still want orange tint) -->
-        <div class="absolute inset-0 bg-gradient-to-br from-orange-500 to-orange-600 opacity-60 z-0"></div>
+        <!-- Gradient overlay -->
+        <div
+            class="absolute inset-0 bg-gradient-to-br from-orange-400 {{ !empty($hero) && !empty($hero->background_image) ? 'opacity-60' : 'opacity-100' }} z-0">
+        </div>
+
         <div class="relative z-10 text-white px-6 md:px-20 max-w-4xl">
+            <!-- Logo Section -->
             <div class="flex justify-start mb-6">
                 <div class="w-20 h-20 rounded-lg logo-placeholder text-sm text-gray-600">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo">
+                    @if (file_exists(public_path('images/logo.png')))
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-full h-full object-contain">
+                    @else
+                        <div class="w-full h-full bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">LOGO</span>
+                        </div>
+                    @endif
                 </div>
             </div>
+
+            <!-- Title Section -->
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 uppercase tracking-wide leading-tight">
-                {{ $hero->title }}
+                @if (!empty($hero) && !empty($hero->title))
+                    {{ $hero->title }}
+                @else
+                    Welcome to Our Company
+                @endif
             </h1>
+
+            <!-- Subtitle Section -->
             <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-2xl">
-                {{ $hero->subtitles }}
+                @if (!empty($hero) && !empty($hero->subtitles))
+                    {{ $hero->subtitles }}
+                @else
+                    Discover amazing solutions and services tailored to your needs. We're here to help you succeed.
+                @endif
             </p>
+
+            <!-- Action Buttons -->
             <div class="flex flex-col sm:flex-row gap-4">
                 <a href="#about"
                     class="bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-center">
-                    Learn More
+                    @if (!empty($hero) && !empty($hero->primary_button_text))
+                        {{ $hero->primary_button_text }}
+                    @else
+                        Learn More
+                    @endif
                 </a>
                 <a href="#contact"
                     class="border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-orange-600 transition-colors text-center">
-                    Get Started
+                    @if (!empty($hero) && !empty($hero->secondary_button_text))
+                        {{ $hero->secondary_button_text }}
+                    @else
+                        Get Started
+                    @endif
                 </a>
             </div>
         </div>
@@ -313,44 +347,52 @@
     </section>
 
     <!-- Objectives Section -->
-    <section class="section-spacing bg-white">
+    <section class="py-16 bg-white">
         <div class="container mx-auto px-6">
+            <!-- Section Header -->
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold text-orange-600 mb-4">Our Objectives</h2>
                 <p class="text-lg text-gray-600">Strategic priorities for organizational excellence</p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="card-hover rounded-lg border bg-white shadow-sm p-6">
-                    <svg class="h-8 w-8 text-orange-500 mb-4" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                    <h3 class="text-lg font-semibold mb-2">Innovation Leadership</h3>
-                    <p class="text-sm text-gray-600">
-                        Drive cutting-edge solutions and stay ahead of industry trends
-                    </p>
-                </div>
+            <!-- Objectives Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
                 @foreach ($objectives as $objective)
-                    <div class="card-hover rounded-lg border bg-white shadow-sm p-6">
-                        <svg class="h-8 w-8 text-orange-500 mb-4" fill="none" stroke="currentColor"
+                    <div class="rounded-lg border bg-white shadow-sm p-6 hover:shadow-lg transition">
+                        <!-- Logo SVG -->
+                        <svg class="h-10 w-10 text-orange-500 mb-4" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
+                            @php
+                                // Define logos array
+                                $logos = [
+                                    'target' =>
+                                        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2" />',
+                                    'growth' =>
+                                        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3v18h18" />',
+                                    'teamwork' =>
+                                        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87" />',
+                                    'innovation' =>
+                                        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m0 14v1m8-8h1M4 12H3m15.364 6.364l.707.707M6.343 6.343l-.707-.707" />',
+                                    'education' =>
+                                        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />',
+                                    'health' =>
+                                        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21C12 21 4 13 4 8a4 4 0 018 0 4 4 0 018 0c0 5-8 13-8 13z" />',
+                                    'sustainability' =>
+                                        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />',
+                                    'leadership' =>
+                                        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 4.674a1 1 0 00.95.69h4.908c.969 0 1.371 1.24.588 1.81l-3.97 2.886a1 1 0 00-.364 1.118l1.518 4.674c.3.921-.755 1.688-1.538 1.118l-3.97-2.886a1 1 0 00-1.176 0l-3.97 2.886c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.364-1.118l-3.97-2.886c-.783-.57-.38-1.81.588-1.81h4.908a1 1 0 00.95-.69l1.518-4.674z" />',
+                                    'technology' =>
+                                        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17a4.25 4.25 0 118.5 0v1.25a2.75 2.75 0 01-2.75 2.75H12.5a2.75 2.75 0 01-2.75-2.75V17z" />',
+                                    'finance' =>
+                                        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V4m0 16v-4" />',
+                                ];
+                                // Use selected logo or fallback to 'target'
+                                echo $logos[$objective->logo ?? 'target'] ?? $logos['target'];
+                            @endphp
                         </svg>
-                        <h3 class="text-lg font-semibold mb-2">Client Success</h3>
-                        <p class="text-sm text-gray-600">
-                            {{ $objective->title }}
-                        </p>
+
+                        <h3 class="text-lg font-gray-900 mb-2">{{ $objective->content }}</h3>
                     </div>
                 @endforeach
 

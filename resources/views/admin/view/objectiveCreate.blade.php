@@ -61,14 +61,14 @@
                             <input type="radio" name="logo" value="{{ $name }}" class="hidden peer"
                                 @checked(old('logo', $objective->logo ?? 'target') === $name)>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor"
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                 class="w-10 h-10 mb-2 text-gray-500 peer-checked:text-green-600 transition">
                                 {!! $path !!}
                             </svg>
 
                             <span class="text-sm font-medium text-gray-700 capitalize">{{ $name }}</span>
-                            <span class="hidden peer-checked:block mt-1 text-xs font-semibold text-green-600">✔ Selected</span>
+                            <span class="hidden peer-checked:block mt-1 text-xs font-semibold text-green-600">✔
+                                Selected</span>
                         </label>
                     @endforeach
                 </div>
