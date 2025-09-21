@@ -15,12 +15,18 @@ class ScopeController extends Controller
     // Store new scope
     public function store(Request $request)
     {
-        $request->validate([
+        // Preprocess link to handle inputs like "example.com"
+        $link = $request->input('link');
+        if (! empty($link) && ! preg_match('~^https?://~', $link)) {
+            $request->merge(['link' => 'https://'.$link]);
+        }
+
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'link'  => 'nullable|url',
+            'link' => 'nullable|url',
         ]);
 
-        Scope::create($request->only('title', 'link'));
+        Scope::create($validated);
 
         return redirect()->route('dashboard')->with('success', 'Scope added successfully!');
     }
@@ -34,12 +40,17 @@ class ScopeController extends Controller
     // Update
     public function update(Request $request, Scope $scope)
     {
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'link'  => 'nullable|url',
+            'link' => 'nullable|url',
         ]);
 
-        $scope->update($request->only('title', 'link'));
+        // If link is provided and missing http/https, prepend https://
+        if (! empty($validated['link']) && ! preg_match('~^https?://~', $validated['link'])) {
+            $validated['link'] = 'https://'.$validated['link'];
+        }
+
+        $scope->update($validated);
 
         return redirect()->route('dashboard')->with('success', 'Scope updated successfully!');
     }
@@ -48,6 +59,7 @@ class ScopeController extends Controller
     public function destroy(Scope $scope)
     {
         $scope->delete();
+
         return redirect()->route('dashboard')->with('success', 'Scope deleted successfully!');
     }
 }

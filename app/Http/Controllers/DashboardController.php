@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CesDetail;
 use App\Models\Hero;
 use App\Models\Objective;
 use App\Models\Scope;
@@ -17,8 +18,9 @@ class DashboardController extends Controller
         $hero = Hero::first();
         $objectives = Objective::all();
         $scopes = Scope::all();
+        $detail = CesDetail::first();
 
-        return view('dashboard', compact('hero', 'objectives', 'scopes'));
+        return view('dashboard', compact('hero', 'objectives', 'scopes','detail'));
     }
 
     /**

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CesDetail;
 use App\Models\Hero;
 use App\Models\Member;
 use App\Models\Objective;
+use App\Models\Scope;
 use Illuminate\Http\Request;
 
 class HomePageController extends Controller
@@ -17,7 +19,9 @@ class HomePageController extends Controller
         $members = Member::all();
         $hero= Hero::first();
         $objectives= Objective::all();
-        return view('welcome',compact('members','hero','objectives'));
+        $scopes= Scope::all();
+        $detail= CesDetail::first();
+        return view('welcome',compact('members','hero','objectives','scopes','detail'));
     }
     
     public function edit(){
