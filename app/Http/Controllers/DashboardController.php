@@ -6,6 +6,7 @@ use App\Models\CesDetail;
 use App\Models\Hero;
 use App\Models\Objective;
 use App\Models\Scope;
+use App\Models\ContactDetail;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -19,8 +20,9 @@ class DashboardController extends Controller
         $objectives = Objective::all();
         $scopes = Scope::all();
         $detail = CesDetail::first();
+        $contactDetail = ContactDetail::first();
 
-        return view('dashboard', compact('hero', 'objectives', 'scopes','detail'));
+        return view('dashboard', compact('hero', 'objectives', 'scopes','detail','contactDetail'));
     }
 
     /**
