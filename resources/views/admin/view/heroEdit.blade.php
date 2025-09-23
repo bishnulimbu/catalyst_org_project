@@ -26,7 +26,7 @@
                 <button @click="showDeleteAlert = false" class="float-right font-bold">&times;</button>
             </div>
 
-            <form action="{{ $hero ? route('hero.update', $hero->id) : route('hero.store') }}" method="POST"
+            <form action="{{ $hero ? route('hero.update', $hero->id) : route('hero.store') }}" method="POST" enctype="multipart/form-data">
                 enctype="multipart/form-data">
                 @csrf
                 @if ($hero)
