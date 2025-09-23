@@ -88,6 +88,99 @@
                 </div>
             </div>
         </div>
+
+        <div class="container mx-auto p-6">
+            <h1 class="text-2xl font-bold mb-6">Scopes of Catalyst Entrepreneur Society</h1>
+
+            <a href="{{ route('scopes.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded">Add Scope</a>
+
+            <div class="mt-6 bg-white shadow rounded p-4">
+                @forelse ($scopes as $scope)
+                    <div class="flex justify-between items-center border-b py-2">
+                        <div>
+                            <p class="font-semibold">{{ $scope->title }}</p>
+                            @if ($scope->link)
+                                <a href="{{ $scope->link }}" target="_blank"
+                                    class="text-blue-500 underline">{{ $scope->link }}</a>
+                            @endif
+                        </div>
+                        <div class="flex space-x-2">
+                            <a href="{{ route('scopes.edit', $scope->id) }}"
+                                class="bg-yellow-500 text-white px-3 py-1 rounded">Edit</a>
+                            <form action="{{ route('scopes.destroy', $scope->id) }}" method="POST"
+                                onsubmit="return confirm('Delete this scope?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                @empty
+                    <p>No scopes added yet.</p>
+                @endforelse
+            </div>
+        </div>
+
+        <div class="container mx-auto p-6">
+            <h1 class="text-2xl font-bold mb-6">CES Details</h1>
+
+            @if ($detail)
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <div class="mb-3">
+                            <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                                DAO Registration Number
+                            </span>
+                            <span class="ml-2">{{ $detail->dao_registration_number }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                                Established Date
+                            </span>
+                            <span class="ml-2">{{ $detail->established_date }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                                SWC Affiliation Number
+                            </span>
+                            <span class="ml-2">{{ $detail->swc_affiliation_number }}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="mb-3">
+                            <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                                PAN No.
+                            </span>
+                            <span class="ml-2">{{ $detail->pan_number }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                                Number of Founding Members
+                            </span>
+                            <span class="ml-2">{{ $detail->founding_members }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                                Total No. of Members
+                            </span>
+                            <span class="ml-2">{{ $detail->total_members }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="{{ route('ces.edit', $detail) }}"
+                    class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded">
+                    Edit Details
+                </a>
+            @else
+                <p>No CES details found.</p>
+                {{-- <a href="{{ route('ces.create') }}" class="mt-4 inline-block bg-green-600 text-white px-4 py-2 rounded">
+                    Add CES Details
+                </a> --}}
+            @endif
+        </div>
+
+
     </div>
 
     <style>

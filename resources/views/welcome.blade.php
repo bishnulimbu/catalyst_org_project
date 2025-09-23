@@ -286,6 +286,82 @@
         </div>
     </section>
 
+
+    <section class="p-6 bg-white shadow rounded max-w-2xl mx-auto">
+        <h2 class="text-2xl font-bold mb-4">Scopes of Catalyst Entrepreneurs Society</h2>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+            @foreach ($scopes as $scope)
+                <li>
+                    @if ($scope->link)
+                        <a href="{{ $scope->link }}" target="_blank" class="text-blue-600 hover:underline">
+                            {{ $scope->title }}
+                        </a>
+                    @else
+                        {{ $scope->title }}
+                    @endif
+                </li>
+            @endforeach
+        </ul>
+    </section>
+
+    <div class="container mx-auto p-6">
+        <h1 class="text-2xl font-bold mb-6">CES Details</h1>
+
+        @if ($detail)
+            <div class="grid grid-cols-2 gap-6">
+                <div>
+                    <div class="mb-3">
+                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                            DAO Registration Number
+                        </span>
+                        <span class="ml-2">{{ $detail->dao_registration_number ?? 'Not available' }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                            Established Date
+                        </span>
+                        <span class="ml-2">{{ $detail->established_date ?? 'Not available' }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                            SWC Affiliation Number
+                        </span>
+                        <span class="ml-2">{{ $detail->swc_affiliation_number ?? 'Not available' }}</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="mb-3">
+                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                            PAN No.
+                        </span>
+                        <span class="ml-2">{{ $detail->pan_number ?? 'Not available' }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                            Number of Founding Members
+                        </span>
+                        <span class="ml-2">{{ $detail->founding_members ?? 'Not available' }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                            Total No. of Members
+                        </span>
+                        <span class="ml-2">{{ $detail->total_members ?? 'Not available' }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <a href="{{ route('ces.edit', $detail) }}"
+                class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded">
+                Edit Details
+            </a>
+        @else
+            <p class="text-gray-600 italic">No CES details found.</p>
+        @endif
+    </div>
+
+
+
     <!-- Mission, Vision, Goals Section -->
     <section id="vision" class="section-spacing bg-orange-50">
         <div class="container mx-auto px-6">
@@ -298,7 +374,8 @@
                 <!-- Mission -->
                 <div class="card-hover rounded-lg border bg-white shadow-sm text-center p-8">
                     <div class="mx-auto mb-4 p-4 bg-orange-100 rounded-full w-fit">
-                        <svg class="h-8 w-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="h-8 w-8 text-orange-600" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
                             <circle cx="12" cy="12" r="10"></circle>
                             <circle cx="12" cy="12" r="6"></circle>
                             <circle cx="12" cy="12" r="2"></circle>
