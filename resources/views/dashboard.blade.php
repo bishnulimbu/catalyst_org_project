@@ -167,17 +167,56 @@
                         </div>
                     </div>
                 </div>
-
-                <a href="{{ route('ces.edit', $detail) }}"
-                    class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded">
-                    Edit Details
-                </a>
             @else
                 <p>No CES details found.</p>
-                {{-- <a href="{{ route('ces.create') }}" class="mt-4 inline-block bg-green-600 text-white px-4 py-2 rounded">
-                    Add CES Details
-                </a> --}}
             @endif
+
+            <a href="{{ route('ces.store') }}" class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded">
+                {{ $detail ? 'Edit Details' : 'Add Details' }}
+            </a>
+        </div>
+
+        <div class="container mx-auto p-6">
+            <h1 class="text-2xl font-bold mb-6">Contact Details</h1>
+
+            @if ($contactDetail)
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="mb-3">
+                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                            Website
+                        </span>
+                        <span class="ml-2">{{ $contactDetail->website }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                            Email
+                        </span>
+                        <span class="ml-2">{{ $contactDetail->email }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                            Phone Numbers
+                        </span>
+                        <div class="ml-2">
+                            @foreach ($contactDetail->phones as $phone)
+                                <span>{{ $phone }}<br></span>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded">
+                            Address
+                        </span>
+                        <span class="ml-2">{{ $contactDetail->address }}</span>
+                    </div>
+                </div>
+            @else
+                <p>No contact details found.</p>
+            @endif
+
+            <a href="{{ route('contact.form') }}" class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded">
+                {{ $contactDetail ? 'Edit Contact Details' : 'Add Contact Details' }}
+            </a>
         </div>
 
 

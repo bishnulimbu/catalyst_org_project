@@ -350,11 +350,6 @@
                     </div>
                 </div>
             </div>
-
-            <a href="{{ route('ces.edit', $detail) }}"
-                class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded">
-                Edit Details
-            </a>
         @else
             <p class="text-gray-600 italic">No CES details found.</p>
         @endif
@@ -614,17 +609,6 @@
                         </div>
                     </div>
 
-                    <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-lg shadow-sm p-6">
-                        <h3 class="font-semibold text-xl mb-2">Ready to Get Started?</h3>
-                        <p class="mb-4 opacity-90">
-                            Schedule a free consultation to discuss your organization's goals and how we can help
-                            achieve them.
-                        </p>
-                        <button
-                            class="bg-white text-orange-600 px-6 py-2 rounded-md hover:bg-gray-100 transition-colors font-semibold">
-                            Schedule Consultation
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
