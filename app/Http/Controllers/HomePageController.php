@@ -7,6 +7,7 @@ use App\Models\Hero;
 use App\Models\Member;
 use App\Models\Objective;
 use App\Models\Scope;
+use App\Models\ContactDetail;
 use Illuminate\Http\Request;
 
 class HomePageController extends Controller
@@ -21,7 +22,8 @@ class HomePageController extends Controller
         $objectives= Objective::all();
         $scopes= Scope::all();
         $detail= CesDetail::first();
-        return view('welcome',compact('members','hero','objectives','scopes','detail'));
+        $contactDetail = ContactDetail::first();
+        return view('welcome',compact('members','hero','objectives','scopes','detail','contactDetail'));
     }
     
     public function edit(){
