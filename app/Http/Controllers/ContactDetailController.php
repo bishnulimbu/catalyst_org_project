@@ -52,9 +52,14 @@ class ContactDetailController extends Controller
             $validated['website'] = 'https://'.$validated['website'];
         }
 
-        // Ensure phones is an array and filter out empty values
-        $validated['phones'] = array_filter(array_map('trim', (array) $validated['phones']));
+        // Convert phones array to JSON manually if needed (though $casts should handle this)
+        if (! empty($validated['phones'])) {
+            $validated['phones'] = json_encode(array_values($validated['phones']));
+        } else {
+            $validated['phones'] = null; // Explicitly set to null if empty
+        }
 
+        // dd($validated);
         $detail->update($validated);
 
         return redirect()->route('dashboard')->with('success', 'Contact details updated successfully!');
