@@ -276,12 +276,6 @@
                     scope for engaging in various business segments. This group is dedicated to inspiring and
                     supporting young, innovative individuals in the business and entrepreneurial sectors.
                 </p>
-                <p class="leading-relaxed text-lg">
-                    The introduction of the Catalyst Entrepreneurs Society is a novel concept within our community,
-                    and its potential long-term impact on our society is significant. The society aims to establish
-                    an extensive entrepreneurial network throughout the country, fostering collaboration and
-                    innovation on a national scale.
-                </p>
             </div>
         </div>
     </section>
@@ -569,8 +563,9 @@
                                 <h3 class="font-semibold text-gray-900">Contact Us</h3>
                                 <a href="https://www.cesnepal.org" target="_blank" class="hover:underline">
                                     www.cesnepal.org
+                                    {{ $contactDetails->website??'' }}
                                 </a>
-                                <p class="text-gray-600">cesnepal2080@gmail.com</p>
+                                <p class="text-gray-600">{{ $contactDetails->email??'' }}</p>
                             </div>
                         </div>
                     </div>
@@ -587,8 +582,9 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-gray-900">Call Us</h3>
-                                <p class="text-gray-600">+977 981-4099804</p>
-                                <p class="text-gray-600">+977 980-1444218</p>
+                                @foreach($contactDetails->phones as $phone)
+                                <p class="text-gray-600">{{ $phone }}</p>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -604,7 +600,7 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-gray-900">Visit Us</h3>
-                                <p class="text-gray-600">Birtamode Municpaltity<br>Jhapa,Nepal</p>
+                                <p class="text-gray-600">{{ $contactDetails->address }}</p>
                             </div>
                         </div>
                     </div>
