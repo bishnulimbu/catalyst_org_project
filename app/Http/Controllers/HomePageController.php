@@ -22,8 +22,8 @@ class HomePageController extends Controller
         $objectives= Objective::all();
         $scopes= Scope::all();
         $detail= CesDetail::first();
-        $contactDetail = ContactDetail::first();
-        return view('welcome',compact('members','hero','objectives','scopes','detail','contactDetail'));
+        $contactDetails = ContactDetail::first();
+        return view('welcome',compact('members','hero','objectives','scopes','detail','contactDetails'));
     }
     
     public function edit(){

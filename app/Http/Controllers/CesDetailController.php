@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CesDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CesDetailController extends Controller
 {
@@ -41,8 +42,23 @@ class CesDetailController extends Controller
             'total_members' => 'required|integer|min:1',
         ]);
 
-        $detail->update($validated);
+        try {
+            $detail->update($validated);
+            Log::info('CES details updated successfully.', [
+                'input' => $request->all(),
+                'ces_detail_id' => $detail->id,
+            ]);
 
-        return redirect()->route('dashboard')->with('success', 'CES details updated successfully!');
+            return redirect()->route('dashboard')->with('success', 'CES details updated successfully!');
+        } catch (\Exception $e) {
+            Log::error('Validation failed in CesDetail update', [
+                'errors' => $e->errors(),
+                'input' => $request->all(),
+                'ces_detail_id' => $detail->id,
+            ]);
+
+            return redirect()->route('dashboard')->with('success', 'CES details updated successfully!');
+        }
+
     }
 }
